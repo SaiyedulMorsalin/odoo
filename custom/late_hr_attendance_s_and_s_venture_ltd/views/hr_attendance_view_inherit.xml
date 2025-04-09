@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+
+        <!-- Inherit the hr_attendance tree view and modify -->
+        <record id="view_attendance_tree_custom" model="ir.ui.view">
+            <field name="name">hr.attendance.list.custom</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="check_in" position="before">
+                    <field string="F Check IN" name="first_check_in"></field>
+                    <field  string="Late" name="emp_att_late"/>
+
+
+                </field>
+                <field name="check_out" position="after">
+                    <field string="Last Check Out" name="last_check_out"></field>
+
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="late_hr_attendance_s_and_s_venture_ltd.list">
+      <field name="name">late_hr_attendance_s_and_s_venture_ltd list</field>
+      <field name="model">late_hr_attendance_s_and_s_venture_ltd.late_hr_attendance_s_and_s_venture_ltd</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="late_hr_attendance_s_and_s_venture_ltd.action_window">
+      <field name="name">late_hr_attendance_s_and_s_venture_ltd window</field>
+      <field name="res_model">late_hr_attendance_s_and_s_venture_ltd.late_hr_attendance_s_and_s_venture_ltd</field>
+      <field name="view_mode">list,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="late_hr_attendance_s_and_s_venture_ltd.action_server">
+      <field name="name">late_hr_attendance_s_and_s_venture_ltd server</field>
+      <field name="model_id" ref="model_late_hr_attendance_s_and_s_venture_ltd_late_hr_attendance_s_and_s_venture_ltd"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="late_hr_attendance_s_and_s_venture_ltd" id="late_hr_attendance_s_and_s_venture_ltd.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="late_hr_attendance_s_and_s_venture_ltd.menu_1" parent="late_hr_attendance_s_and_s_venture_ltd.menu_root"/>
+    <menuitem name="Menu 2" id="late_hr_attendance_s_and_s_venture_ltd.menu_2" parent="late_hr_attendance_s_and_s_venture_ltd.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="late_hr_attendance_s_and_s_venture_ltd.menu_1_list" parent="late_hr_attendance_s_and_s_venture_ltd.menu_1"
+              action="late_hr_attendance_s_and_s_venture_ltd.action_window"/>
+    <menuitem name="Server to list" id="late_hr_attendance_s_and_s_venture_ltd" parent="late_hr_attendance_s_and_s_venture_ltd.menu_2"
+              action="late_hr_attendance_s_and_s_venture_ltd.action_server"/>
+-->
+  </data>
+</odoo>
