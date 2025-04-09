@@ -77,7 +77,7 @@ class InheritHRAttendance(models.Model):
                         emp_first_check_in_date = att.check_in
 
             print('first_check out',first_check_in)
-            print('first_check out', first_check_in.hour)
+            print('first_check out', first_check_in)
             for att in attendance_list:
                 if att.check_out and att.check_out.date() == today:
                     if last_check_out is None or att.check_out > last_check_out:
@@ -103,24 +103,21 @@ class InheritHRAttendance(models.Model):
                     print("start hour",start_hour,'first check in time',emp_first_check_in_today)
                     # Mark as late if check-in is after start hour
                     if employee:
-                        # Search for today's attendance (you can adjust the domain as needed)
-                        attendance = self.env['hr.attendance'].sudo().search([
+
+                        print("Searching for late attendance:")
+                        print(f"Employee: {employee.id}, Check-in time: {first_check_in}, Start hour: {start_hour}")
+                        print(f"Query: {datetime.combine(today, time(start_hour.hour, 14, 59))}")
+
+                        late_attendance = self.env['hr.attendance'].sudo().search([
                             ('employee_id', '=', employee.id),
                             ('first_check_in', '>', datetime.combine(today, time(start_hour.hour, 14, 59))),
                             ('emp_att_late', '=', '')
                         ], limit=1)
+                        print('Late check in',late_attendance.first_check_in)
+                        late_attendance.update({'emp_att_late':'Late'})
+                        print(f"Late Attendance found: {late_attendance.check_in}")
 
-                        if attendance:
-                            print("COunt Late")
-                            attendance.write({'emp_att_late': 'Late'})
 
-                    # late_attendance = self.env['hr.attendance'].sudo().search([
-                    #     ('employee_id', '=', employee.id),
-                    #     ('first_check_in', '>', datetime.combine(today, start_hour))
-                    # ], limit=1)
-                    # print(datetime.combine(today, start_hour))
-                    # if late_attendance:
-                    #     print("late dict", late_attendance)
-                    #     late_attendance.write({'emp_att_late': 'Late'})
+
 
         return res

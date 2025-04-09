@@ -36,12 +36,14 @@ class ZkMachine(models.Model):
     _name = 'zk.machine.attendance'
     _inherit = 'hr.attendance'
     late_attendance = fields.Char(string="Late")
+    last_check_out = fields.Datetime(string='Last Check', )
     @api.constrains('check_in', 'check_out', 'employee_id')
     def _check_validity(self):
         """overriding the __check_validity function for employee attendance."""
         pass
 
-    late_attendance = fields.Char(string="Late")
+
+
     device_id = fields.Char(string='Biometric Device ID',
                             help="Biometric device id")
     punch_type = fields.Selection([('0', 'Check In'),

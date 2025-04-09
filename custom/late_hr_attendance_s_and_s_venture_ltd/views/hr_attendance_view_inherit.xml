@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
 
                 <field name="check_in" position="before">
-                    <field string="F Check IN" name="first_check_in"></field>
+                    <field string="First Check In" name="first_check_in"></field>
                     <field  string="Late" name="emp_att_late"/>
 
 

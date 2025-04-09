@@ -137,6 +137,7 @@ class ZkMachine(models.Model):
         for machine in machines:
             machine.download_attendance()
 
+
     @api.model
     def download_daily_915(self):
         """
