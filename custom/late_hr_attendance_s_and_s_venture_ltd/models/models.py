@@ -9,6 +9,21 @@ class SsVentureHrAttendance(models.Model):
     _description = 'SS Venture HR Attendance'
 
 
+
+
+
+
+class Daily(models.Model):
+    _name = 'ss.venture.hr.attendance'
+    _description = 'SS Venture HR Attendance'
+
+
+
+
+
+
+
+
 def get_local_datetime(self, your_date_or_datetime_info):
     user_tz = self.env.user.tz or 'UTC'
     local = pytz.timezone(user_tz)
@@ -121,3 +136,7 @@ class InheritHRAttendance(models.Model):
 
 
         return res
+
+
+
+

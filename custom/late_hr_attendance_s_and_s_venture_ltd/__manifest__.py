@@ -26,6 +26,7 @@ Long description of module's purpose
         'views/views.xml',
         'views/templates.xml',
         'views/hr_attendance_view_inherit.xml',
+        'views/daily_report_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
