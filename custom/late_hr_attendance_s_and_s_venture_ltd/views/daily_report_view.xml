@@ -28,7 +28,7 @@
                   id="daily_menu"
                   parent="hr_attendance.menu_hr_attendance_root"
                   action="action_attendance_daily"
-                  sequence="20"  />
+                  sequence="5"  />
 
 
 </odoo>
