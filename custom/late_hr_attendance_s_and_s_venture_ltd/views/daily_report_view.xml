@@ -1,69 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        
-       <record id="_form_view" model="ir.ui.view">
-            <field name="name">ProjectName..form</field>
-            <field name="model">ProjectName.</field>
+
+
+        <!-- Tree view -->
+        <record id="daily_tree_view" model="ir.ui.view">
+            <field name="name">attendance.daily.tree</field>
+            <field name="model">attendance.daily</field>
+            <field name="type">list</field>
             <field name="arch" type="xml">
-                <form string="ModelTitle">
-                <sheet>
-                    <div class="oe_title">
-                        <label for="example_title"/>
-                        <h1>
-                            <field name="example_title" placeholder="Title"/>
-                        </h1>
-                    </div>
-                    <group>
-                        <group>
-                            <field name="create_date" />
-                        </group>
-                        <group>
-                            <field name="example_field"/>
-                        </group>
-                    </group>
-                </sheet>
-                </form>
+                <list string="Daily Attendance">
+                    <field name="name"/>
+                </list>
             </field>
         </record>
 
-        <record id="_tree_view" model="ir.ui.view">
-            <field name="name">ProjectName..tree</field>
-            <field name="model">ProjectName.</field>
-            <field name="arch" type="xml">
-                <tree string="ModelTitle">
-                    <field name="create_date"/>
-                    <field name="example_field"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="_search_view" model="ir.ui.view">
-            <field name="name">ProjectName..search</field>
-            <field name="model">ProjectName.</field>
-            <field name="arch" type="xml">
-                <search string="ModelTitle">
-                    <group expand="1" string="Group By">
-                        <filter string="Example Field" name="example_field" domain="[]" context="{'group_by':'example_field'}"/>
-                    </group>
-               </search>
-            </field>
-        </record>
-
-        <record id="_act_window" model="ir.actions.act_window">
-            <field name="name">ModelTitle</field>
+        <!-- Action to launch view -->
+        <record id="action_attendance_daily" model="ir.actions.act_window">
+            <field name="name">Daily Attendance</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">ProjectName.</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    There is no examples click here to add new ModelTitle.
-                </p>
-            </field>
+            <field name="res_model">attendance.daily</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="daily_tree_view"/>
         </record>
 
-        <menuitem name="ModelTitle" id="_menu" parent="your_root_menu" action="_act_window"/>
+        <!-- Menu item -->
+        <menuitem name="Daily Attendance"
+                  id="daily_menu"
+                  parent="hr_attendance.menu_hr_attendance_root"
+                  action="action_attendance_daily"
+                  sequence="20"  />
 
-    </data>
+
 </odoo>

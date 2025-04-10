@@ -13,9 +13,11 @@ class SsVentureHrAttendance(models.Model):
 
 
 
-class Daily(models.Model):
-    _name = 'ss.venture.hr.attendance'
-    _description = 'SS Venture HR Attendance'
+class DailyAttendance(models.Model):
+    _name = 'attendance.daily'
+    _description = 'SS Venture HR Attendance Daily'
+    name=fields.Char(string='Employee Name')
+
 
 
 
