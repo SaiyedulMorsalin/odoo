@@ -15,11 +15,37 @@ class SsVentureHrAttendance(models.Model):
 
 class DailyAttendance(models.Model):
     _name = 'attendance.daily'
-    _description = 'SS Venture HR Attendance Daily'
-    name=fields.Char(string='Employee Name')
+    _description = 'Daily Attendance'
+
+    employee_id = fields.Many2one('hr.employee', string='Employee')
+    first_check_in = fields.Datetime(string='Check In')
+    last_check_out = fields.Datetime(string='Check Out')
+    worked_hours = fields.Float(string="Valid Worked Hours")
 
 
+    def generate_daily_attendance(self):
+        print("____________Daily Attendance__________")
+        employees = self.env['hr.employee'].search([])
+        for emp in employees:
+            today_attendances = self.env['hr.attendance'].search([
+                ('employee_id', '=', emp.id),
+                # ('check_in', '>=', fields.Date.today()),
+                # ('check_in', '<', fields.Date.today() + timedelta(days=1)),
+            ], order='check_in asc')
 
+            if today_attendances:
+                self.create({
+                    'employee_id': emp.id,
+                    'first_check_in': today_attendances[0].check_in,
+                    'last_check_out': today_attendances[-1].check_out,
+                    'worked_hours': sum(today_attendances.mapped('worked_hours')),
+                })
+
+    @api.onchange
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        print("____________Daily Attendance__________")
+        self.generate_daily_attendance()
+        return super(DailyAttendance, self).search(args, offset=offset, limit=limit, order=order, count=count)
 
 
 

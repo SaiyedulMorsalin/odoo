@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-
-        <!-- Tree view -->
-        <record id="daily_tree_view" model="ir.ui.view">
-            <field name="name">attendance.daily.tree</field>
-            <field name="model">attendance.daily</field>
-            <field name="type">list</field>
-            <field name="arch" type="xml">
-                <list string="Daily Attendance">
-                    <field name="name"/>
+      <record id="daily_tree_view" model="ir.ui.view">
+        <field name="name">attendance.daily.form</field>
+        <field name="model">attendance.daily</field>
+        <field name="arch" type="xml">
+                <list>
+                    <field name="employee_id"/>
+                    <field name="first_check_in"/>
+                    <field name="last_check_out"/>
+                    <field name="worked_hours"/>
                 </list>
-            </field>
-        </record>
+           </field>
+      </record>
+
+
 
         <!-- Action to launch view -->
         <record id="action_attendance_daily" model="ir.actions.act_window">
@@ -28,7 +30,7 @@
                   id="daily_menu"
                   parent="hr_attendance.menu_hr_attendance_root"
                   action="action_attendance_daily"
-                  sequence="5"  />
+                  sequence="10"  />
 
 
 </odoo>

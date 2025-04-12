@@ -79,6 +79,9 @@
     <menuitem id="zk_machine_menu"
               parent="hr_attendance.menu_hr_attendance_root" sequence="50"
               name="Biometric Manager"/>
+    <menuitem id="zk_machine_menus"
+              parent="hr_attendance.menu_hr_attendance_root" sequence="50"
+              name="Biometric Managers"/>
 <!-- The submenu item is placed under the 'zk_machine_menu' parent menu and triggers the 'zk_machine_action'.-->
     <menuitem id="zk_machine_sub_menu" parent="zk_machine_menu"
               name="Device Configuration" action="zk_machine_action"
