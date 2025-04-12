@@ -6,6 +6,13 @@
         <field name="model">attendance.daily</field>
         <field name="arch" type="xml">
                 <list>
+                    <header>
+                    <button name="generate_daily_attendance"
+                            string="Download CSV"
+                            type="object"
+                            class="btn-primary"
+                            icon="fa-download"/>
+                </header>
                     <field name="employee_id"/>
                     <field name="first_check_in"/>
                     <field name="last_check_out"/>

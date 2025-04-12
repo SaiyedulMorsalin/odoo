@@ -23,7 +23,7 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-
+        'data/daily_attendance_download.xml',
         'views/daily_report_view.xml',
         'views/views.xml',
         'views/templates.xml',

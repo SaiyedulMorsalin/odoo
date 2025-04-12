@@ -22,34 +22,54 @@ class DailyAttendance(models.Model):
     last_check_out = fields.Datetime(string='Check Out')
     worked_hours = fields.Float(string="Valid Worked Hours")
 
-
     def generate_daily_attendance(self):
-        print("____________Daily Attendance__________")
+        print("____________Daily Attendance Created__________")
+        today = fields.Date.today()
         employees = self.env['hr.employee'].search([])
+
         for emp in employees:
+            # Get today's datetime range
+            start_datetime = datetime.combine(today, datetime.min.time())
+            end_datetime = datetime.combine(today + timedelta(days=1), datetime.min.time())
+
+            # Get today's attendance records for employee
             today_attendances = self.env['hr.attendance'].search([
                 ('employee_id', '=', emp.id),
-                # ('check_in', '>=', fields.Date.today()),
-                # ('check_in', '<', fields.Date.today() + timedelta(days=1)),
+                ('check_in', '>=', start_datetime),
+                ('check_in', '<', end_datetime),
             ], order='check_in asc')
 
-            if today_attendances:
+            if not today_attendances:
+                continue  # No check-ins today
+
+            # Calculate values
+            first_check_in = today_attendances[0].check_in
+            last_check_out = today_attendances[-1].check_out
+            print('first_Check_In',first_check_in+timedelta(hours=6))
+            worked_hours = sum(today_attendances.mapped('worked_hours'))
+
+            # Find existing summary
+            existing_summary = self.search([
+                ('employee_id', '=', emp.id),
+                ('first_check_in', '>=', start_datetime),
+                ('first_check_in', '<', end_datetime)
+            ], limit=1)
+
+            if existing_summary:
+                # Update the existing record
+                existing_summary.write({
+                    'first_check_in': first_check_in,
+                    'last_check_out': last_check_out,
+                    'worked_hours': worked_hours,
+                })
+            else:
+                # Create new summary
                 self.create({
                     'employee_id': emp.id,
-                    'first_check_in': today_attendances[0].check_in,
-                    'last_check_out': today_attendances[-1].check_out,
-                    'worked_hours': sum(today_attendances.mapped('worked_hours')),
+                    'first_check_in': first_check_in,
+                    'last_check_out': last_check_out,
+                    'worked_hours': worked_hours,
                 })
-
-    @api.onchange
-    def search(self, args, offset=0, limit=None, order=None, count=False):
-        print("____________Daily Attendance__________")
-        self.generate_daily_attendance()
-        return super(DailyAttendance, self).search(args, offset=offset, limit=limit, order=order, count=count)
-
-
-
-
 
 
 def get_local_datetime(self, your_date_or_datetime_info):
