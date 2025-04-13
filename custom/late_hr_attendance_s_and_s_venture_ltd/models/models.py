@@ -27,20 +27,23 @@ class DailyAttendance(models.Model):
         print("____________Daily Attendance Created__________")
         today = fields.Date.today()
         employees = self.env['hr.employee'].search([])
+        print(today)
 
         for emp in employees:
             # Get today's datetime range
             start_datetime = datetime.combine(today, datetime.min.time())
             end_datetime = datetime.combine(today + timedelta(days=1), datetime.min.time())
-
+            print('start_datetime',start_datetime)
+            print('end_datetime',end_datetime)
             # Get today's attendance records for employee
             today_attendances = self.env['hr.attendance'].search([
                 ('employee_id', '=', emp.id),
                 ('check_in', '>=', start_datetime),
                 ('check_in', '<', end_datetime),
             ], order='check_in asc')
-
+            print('today_attendance',today_attendances.check_in)
             if not today_attendances:
+                today_attendances.unlink()
                 continue  # No check-ins today
 
             # Calculate values
@@ -57,7 +60,7 @@ class DailyAttendance(models.Model):
                 ('first_check_in', '>=', start_datetime),
                 ('first_check_in', '<', end_datetime)
             ], limit=1)
-
+            print('existing summary',existing_summary)
             if existing_summary:
                 # Update the existing record
                 existing_summary.write({
