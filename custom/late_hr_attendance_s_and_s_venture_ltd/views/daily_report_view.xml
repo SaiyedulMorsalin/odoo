@@ -14,8 +14,10 @@
                             icon="fa-download"/>
                 </header>
                     <field name="employee_id"/>
+                    <field name="emp_att_late" string="Late"/>
                     <field name="first_check_in"/>
                     <field name="last_check_out"/>
+
                     <field name="worked_hours"/>
                 </list>
            </field>

@@ -21,6 +21,7 @@ class DailyAttendance(models.Model):
     first_check_in = fields.Datetime(string='Check In')
     last_check_out = fields.Datetime(string='Check Out')
     worked_hours = fields.Float(string="Valid Worked Hours")
+    emp_att_late = fields.Char(default='')
 
     def generate_daily_attendance(self):
         print("____________Daily Attendance Created__________")
@@ -45,7 +46,9 @@ class DailyAttendance(models.Model):
             # Calculate values
             first_check_in = today_attendances[0].check_in
             last_check_out = today_attendances[-1].check_out
-            print('first_Check_In',first_check_in+timedelta(hours=6))
+            emp_first_check_in = first_check_in + timedelta(hours=6)
+            print('first_Check_In',emp_first_check_in)
+
             worked_hours = sum(today_attendances.mapped('worked_hours'))
 
             # Find existing summary
