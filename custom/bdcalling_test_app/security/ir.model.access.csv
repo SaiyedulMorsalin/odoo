@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_bdcalling_test_app_bdcalling_test_app,bdcalling_test_app.bdcalling_test_app,model_bdcalling_test_app_bdcalling_test_app,base.group_user,1,1,1,1
